@@ -1,5 +1,7 @@
 package com.Tejas.BinaryTree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTree {
@@ -76,15 +78,15 @@ public class BinaryTree {
 	}
 	
 	// Recursive inorder traversal of a binary tree
-	public void inOrder(TreeNode root) {
-		if (root == null) 
-		{
-			return;
-		}
-		inOrder(root.left);
-		System.out.print(root.data+" ");
-		inOrder(root.right);
-	}
+//	public void inOrder(TreeNode root) {
+//		if (root == null) 
+//		{
+//			return;
+//		}
+//		inOrder(root.left);
+//		System.out.print(root.data+" ");
+//		inOrder(root.right);
+//	}
 	
 	// Iterative inorder traversal of a binary tree
 	public void inOrder() {
@@ -112,6 +114,91 @@ public class BinaryTree {
 		}
 			
 	}
+	
+	// Recursive postorder traversal of a bianry tree
+//	public void postOrder(TreeNode root) {
+//		if (root == null) {
+//			return;
+//		}
+//		postOrder(root.left);
+//		postOrder(root.right);
+//		System.out.print(root.data+" ");
+//	}
+	
+	// Iterative postorder traversal of as bianry tree
+	public void postOrder() {
+		if (root == null) 
+		{
+			return;
+		}
+		TreeNode current = root;
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode temp = null;
+		while (current != null || !stack.isEmpty()) 
+		{
+			if (current != null) 
+			{
+				stack.push(current);
+				current=current.left;
+			}
+			else 
+			{
+			    temp = stack.peek().right;
+				if (temp == null) 
+				{
+					temp= stack.pop();
+					System.out.print(temp.data+" ");
+					while (!stack.isEmpty() && temp == stack.peek().right) 
+					{
+						temp = stack.pop();
+						System.out.print(temp.data+" ");
+					}
+				}
+				else 
+				{
+					current = temp;
+				}
+			}
+		}
+	}
+	
+	// Level order traversal of a binary tree
+	public void LevelOrder() {
+		if (root == null) 
+		{
+			return;
+		}
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		while (!queue.isEmpty()) 
+		{
+			TreeNode temp = queue.poll();
+			System.out.print(temp.data+" ");
+			if (temp.left!=null) 
+			{
+				queue.offer(temp.left);
+			}
+			if (temp.right!=null) 
+			{
+				queue.offer(temp.right);
+			}
+		}
+	}
+	
+	// Recursively find maximum value in binary tree
+	public int findMax(TreeNode root) {
+	    if (root == null) {
+	        return Integer.MIN_VALUE;  // Return a very small value if the tree is empty
+	    }
+	    
+	    // Recursively find the maximum value in the left and right subtrees
+	    int leftMax = findMax(root.left);
+	    int rightMax = findMax(root.right);
+	    
+	    // Return the maximum of the current node's value, leftMax, and rightMax
+	    return Math.max(root.data, Math.max(leftMax, rightMax));
+	}
+
 
 	public static void main(String[] args) {
 		BinaryTree bt = new BinaryTree();
@@ -123,12 +210,24 @@ public class BinaryTree {
 		// Iterative preorder
 		//bt.preOrder();
 		
-		// recursive inorder
+		// Recursive inorder
 		//bt.inOrder(bt.root);
 		
 		// Iterative inorder
-		bt.inOrder();
+		//bt.inOrder();
+		
+		// Recursive postorder
+		//bt.postOrder(bt.root);
+		
+		// Iterative postorder
+		//bt.postOrder();
 
+		// Levelorder
+		//bt.LevelOrder();
+		
+		// Max value 
+		int max = bt.findMax(bt.root);
+		System.out.println(+max);
 	}
 
 }
