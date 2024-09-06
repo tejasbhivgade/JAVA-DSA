@@ -2,17 +2,17 @@ package com.Tejas.LinkedList;
 
 public class SinglyLinkedList {
 	
-private ListNode head;
+    private ListNode head;
 
-private static class ListNode{
+    private static class ListNode{
 	
-	private int data;
-	private ListNode next;
+	    private int data;
+	    private ListNode next;
 	
-	public ListNode(int data) {
+	    public ListNode(int data) {
 		
-		this.data = data;
-		this.next = null;
+		    this.data = data;
+	      	this.next = null;
 	}
 }
 
