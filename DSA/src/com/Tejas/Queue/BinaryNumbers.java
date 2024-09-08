@@ -10,7 +10,7 @@ package com.Tejas.Queue;
 
 	        Queue<String> q = new LinkedList<>();
 	        q.offer("1");
-
+  
 	        for (int i = 0; i < n; i++) {
 	        	binaryNumbers[i] = q.poll();
 	            
