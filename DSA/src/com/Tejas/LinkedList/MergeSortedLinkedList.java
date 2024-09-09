@@ -43,7 +43,7 @@ public class MergeSortedLinkedList {
 		return dummy.next;
 	}
 	
-	  public void display(ListNode head) {
+	  public void display() {
 	        ListNode current = head;
 	        while (current != null) {
 	            System.out.print(current.data + " -> ");
@@ -51,6 +51,23 @@ public class MergeSortedLinkedList {
 	        }
 	        System.out.println("null");
 	    }
+
+	  
+	  public void insertLast(int value) {
+			ListNode newnode = new ListNode(value);
+			if (head==null) 
+			{
+				head = newnode;
+				return; 
+			}
+			
+			ListNode current = head;
+			while (null!=current.next) 
+			{
+				current=current.next;
+			}
+			current.next=newnode;
+		}
 
 	  
 	  public ListNode createList(int[] data) {
@@ -68,28 +85,27 @@ public class MergeSortedLinkedList {
 	  
 	public static void main(String[] args) {
 		
-		MergeSortedLinkedList msll = new MergeSortedLinkedList();
+		MergeSortedLinkedList msll1 = new MergeSortedLinkedList();
 		
-		// Create two sorted linked lists
-		int[] list1Data = {1, 4, 8};  // First sorted list
-		int[] list2Data = {3, 6};     // Second sorted list
+		msll1.insertLast(1);
+		msll1.insertLast(4);
+		msll1.insertLast(8);
 
-		// Create linked lists from the arrays
-		ListNode list1 = msll.createList(list1Data);
-		ListNode list2 = msll.createList(list2Data);
+		MergeSortedLinkedList msll2 = new MergeSortedLinkedList();
 
-		// Display the original lists
-		System.out.print("List 1: ");
-		msll.display(list1);
+		msll2.insertLast(3);
+		msll2.insertLast(6);
+		
+		msll1.display();
+		msll2.display();
+		
+		MergeSortedLinkedList result = new MergeSortedLinkedList();
+		
+		result.head = result.merge(msll1.head, msll2.head);
+		
+		result.display();
+		
 
-		System.out.print("List 2: ");
-		msll.display(list2);
-
-		// Merge the two sorted linked lists
-		ListNode mergedList = msll.merge(list1, list2);
-
-		// Display the merged linked list
-		System.out.print("Merged List: ");
-		msll.display(mergedList);
 	}
+
 }
